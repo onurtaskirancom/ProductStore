@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using ProductStore.Models.DbModels;
 
 namespace ProductStore.Data
 {
@@ -9,5 +10,6 @@ namespace ProductStore.Data
             : base(options)
         {
         }
+        public DbSet<Category> Categories { get; set; }
     }
 }
