@@ -8,6 +8,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using ProductStore.Data;
+using ProductStore.DataAccess.IMainRepository;
+using ProductStore.DataAccess.MainRepository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -34,6 +36,9 @@ namespace ProductStore
 
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
+
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
+
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
         }
 
