@@ -5,14 +5,14 @@ using ProductStore.Models.DbModels;
 namespace ProductStore.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    public class CategoryController : Controller
+    public class CompanyController : Controller
     {
         #region Variables
         private readonly IUnitOfWork _unitOfWork; 
         #endregion
 
         #region CTOR
-        public CategoryController(IUnitOfWork unitOfWork)
+        public CompanyController(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
         } 
@@ -28,18 +28,18 @@ namespace ProductStore.Areas.Admin.Controllers
         #region API CALLS
         public IActionResult GetAll()
         {
-            var allObj = _unitOfWork.Category.GetAll();
+            var allObj = _unitOfWork.Company.GetAll();
             return Json(new { data = allObj });
         } 
         #endregion
 
         public IActionResult Delete(int id)
         {
-            var deleteData = _unitOfWork.Category.Get(id);
+            var deleteData = _unitOfWork.Company.Get(id);
             if (deleteData == null)
                 return Json(new { success = false, message = "Data Not Found!" });
 
-            _unitOfWork.Category.Remove(deleteData);
+            _unitOfWork.Company.Remove(deleteData);
             _unitOfWork.Save();
             return Json(new { success = true, message = "Delete Operation Successfully" });
 
@@ -53,14 +53,14 @@ namespace ProductStore.Areas.Admin.Controllers
         [HttpGet]
         public IActionResult Upsert(int? id)
         {
-            Category cat = new Category();
+            Company cat = new Company();
             if (id==null)
             {
                 //This for create
                 return View(cat);
             }
 
-            cat = _unitOfWork.Category.Get((int)id);
+            cat = _unitOfWork.Company.Get((int)id);
             if (cat != null)
             {
                 return View(cat);
@@ -70,24 +70,24 @@ namespace ProductStore.Areas.Admin.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Upsert(Category category)
+        public IActionResult Upsert(Company Company)
         {
             if (ModelState.IsValid)
             {
-                if (category.Id == 0)
+                if (Company.Id == 0)
                 {
                     //Create
-                    _unitOfWork.Category.Add(category);
+                    _unitOfWork.Company.Add(Company);
                 }
                 else
                 {
                     //Update
-                    _unitOfWork.Category.Update(category);
+                    _unitOfWork.Company.Update(Company);
                 }
                 _unitOfWork.Save();
                 return RedirectToAction("Index");
             }
-            return View(category);
+            return View(Company);
         }
     }
 }
