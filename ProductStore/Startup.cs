@@ -45,6 +45,25 @@ namespace ProductStore
 
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
             services.AddMvc();
+
+            services.ConfigureApplicationCookie(options =>
+            {
+                options.LoginPath = $"/Identity/Account/Login";
+                options.LogoutPath = $"/Identity/Account/Logout";
+                options.AccessDeniedPath = $"/Identity/Account/AccessDenied";
+            });
+
+            services.AddAuthentication().AddFacebook(options =>
+            {
+                options.AppId = "1101619920249421";
+                options.AppSecret = "a08583d0cafe20aca891ca44f7993c92";
+            });
+
+            services.AddAuthentication().AddGoogle(options =>
+            {
+                options.ClientId = "269629951546-tla4d7a0tkaglmnugv632dh3vao79vjt.apps.googleusercontent.com";
+                options.ClientSecret = "1k7bKeuFRDo_XPAt26_mVvnD";
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -1,0 +1,11 @@
+﻿@model ProductStore.Models.DbModels.Product
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Details</h1>
+<img src="@Model.ImageUrl" alt="">
+
+<p>@Model.Title</p>
+<p>@Model.Price</p>

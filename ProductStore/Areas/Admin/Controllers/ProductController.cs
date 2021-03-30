@@ -1,9 +1,11 @@
-﻿using Microsoft.AspNetCore.Hosting;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using ProductStore.DataAccess.IMainRepository;
 using ProductStore.Models.DbModels;
 using ProductStore.Models.ViewModels;
+using ProductStore.Utility;
 using System;
 using System.IO;
 using System.Linq;
@@ -11,6 +13,7 @@ using System.Linq;
 namespace ProductStore.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = ProjectConstant.Role_Admin)]
     public class ProductController : Controller
     {
         #region Variables

@@ -1,4 +1,5 @@
 ﻿using Dapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using ProductStore.DataAccess.IMainRepository;
 using ProductStore.Models.DbModels;
@@ -7,6 +8,7 @@ using ProductStore.Utility;
 namespace ProductStore.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = ProjectConstant.Role_Admin)]
     public class CoverTypeController : Controller
     {
         #region Variables
